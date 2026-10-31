@@ -1,0 +1,414 @@
+{
+  "name": "codex-session-tabs",
+  "displayName": "Codex Session Tabs",
+  "description": "%extension.description%",
+  "version": "0.9.0",
+  "publisher": "MrKarmannik",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.111.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "main": "./extension.js",
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "contributes": {
+    "configuration": {
+      "title": "Codex Session Tabs",
+      "properties": {
+        "codexSessionTabs.chatMode": {
+          "type": "string",
+          "enum": [
+            "native",
+            "terminal"
+          ],
+          "default": "native",
+          "scope": "application",
+          "enumItemLabels": [
+            "%extension.contributes.configuration.properties.codexSessionTabs.chatMode.enumItemLabels.0%",
+            "%extension.contributes.configuration.properties.codexSessionTabs.chatMode.enumItemLabels.1%"
+          ],
+          "enumDescriptions": [
+            "%extension.contributes.configuration.properties.codexSessionTabs.chatMode.enumDescriptions.0%",
+            "%extension.contributes.configuration.properties.codexSessionTabs.chatMode.enumDescriptions.1%"
+          ],
+          "description": "%extension.contributes.configuration.properties.codexSessionTabs.chatMode.description%"
+        },
+        "codexSessionTabs.cliPath": {
+          "type": "string",
+          "default": "",
+          "scope": "machine",
+          "restricted": true,
+          "description": "%extension.contributes.configuration.properties.codexSessionTabs.cliPath.description%"
+        },
+        "codexSessionTabs.generateTitles": {
+          "type": "boolean",
+          "default": true,
+          "scope": "application",
+          "description": "%extension.contributes.configuration.properties.codexSessionTabs.generateTitles.description%"
+        },
+        "codexSessionTabs.titleModel": {
+          "type": "string",
+          "default": "gpt-6-luna",
+          "scope": "application",
+          "description": "%extension.contributes.configuration.properties.codexSessionTabs.titleModel.description%",
+          "minLength": 1
+        },
+        "codexSessionTabs.language": {
+          "type": "string",
+          "enum": [
+            "auto",
+            "en",
+            "ru"
+          ],
+          "default": "auto",
+          "scope": "application",
+          "enumItemLabels": [
+            "%language.auto%",
+            "English",
+            "Русский"
+          ],
+          "description": "%language.description%"
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "codexSessionTabs.history",
+        "title": "%extension.contributes.commands.0.title%",
+        "category": "Codex",
+        "icon": "$(list-selection)"
+      },
+      {
+        "command": "codexSessionTabs.newChat",
+        "title": "%extension.contributes.commands.1.title%",
+        "category": "Codex",
+        "icon": "$(add)"
+      },
+      {
+        "command": "codexSessionTabs.focusLast",
+        "title": "%extension.contributes.commands.2.title%",
+        "category": "Codex",
+        "icon": "$(comment-discussion)"
+      },
+      {
+        "command": "codexSessionTabs.reopenClosed",
+        "title": "%extension.contributes.commands.3.title%",
+        "category": "Codex",
+        "icon": "$(discard)"
+      },
+      {
+        "command": "codexSessionTabs.refresh",
+        "title": "%extension.contributes.commands.4.title%",
+        "category": "Codex",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "codexSessionTabs.search",
+        "title": "%extension.contributes.commands.5.title%",
+        "category": "Codex",
+        "icon": "$(search)"
+      },
+      {
+        "command": "codexSessionTabs.clearSearch",
+        "title": "%extension.contributes.commands.6.title%",
+        "category": "Codex",
+        "icon": "$(clear-all)"
+      },
+      {
+        "command": "codexSessionTabs.toggleProject",
+        "title": "%extension.contributes.commands.7.title%",
+        "category": "Codex",
+        "icon": "$(folder)",
+        "toggled": {
+          "condition": "codexSessionTabs.projectOnly",
+          "title": "%command.showAllProjects%"
+        }
+      },
+      {
+        "command": "codexSessionTabs.sidebar.open",
+        "title": "%extension.contributes.commands.8.title%",
+        "category": "Codex"
+      },
+      {
+        "command": "codexSessionTabs.sidebar.beside",
+        "title": "%extension.contributes.commands.9.title%",
+        "category": "Codex",
+        "icon": "$(split-horizontal)"
+      },
+      {
+        "command": "codexSessionTabs.sidebar.pin",
+        "title": "%extension.contributes.commands.10.title%",
+        "category": "Codex",
+        "icon": "$(pin)"
+      },
+      {
+        "command": "codexSessionTabs.sidebar.close",
+        "title": "%extension.contributes.commands.11.title%",
+        "category": "Codex",
+        "icon": "$(close)"
+      },
+      {
+        "command": "codexSessionTabs.recoverUI",
+        "title": "%extension.contributes.commands.12.title%",
+        "category": "Codex",
+        "icon": "$(debug-restart)"
+      },
+      {
+        "command": "codexSessionTabs.chooseMode",
+        "title": "%extension.contributes.commands.13.title%",
+        "category": "Codex",
+        "icon": "$(terminal)"
+      },
+      {
+        "command": "codexSessionTabs.rename",
+        "title": "%extension.contributes.commands.14.title%",
+        "category": "Codex",
+        "icon": "$(edit)"
+      },
+      {
+        "command": "codexSessionTabs.openSettings",
+        "title": "%extension.contributes.commands.15.title%",
+        "category": "Codex",
+        "icon": "$(settings-gear)"
+      },
+      {
+        "command": "codexSessionTabs.generateTitle",
+        "title": "%extension.contributes.commands.16.title%",
+        "category": "Codex",
+        "icon": "$(sparkle)"
+      },
+      {
+        "command": "codexSessionTabs.chooseLanguage",
+        "title": "%command.chooseLanguage%",
+        "category": "Codex",
+        "icon": "$(globe)"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "codexSessionTabs.history",
+        "key": "ctrl+alt+h",
+        "mac": "cmd+alt+h"
+      },
+      {
+        "command": "codexSessionTabs.newChat",
+        "key": "ctrl+alt+n",
+        "mac": "cmd+alt+n"
+      },
+      {
+        "command": "codexSessionTabs.focusLast",
+        "key": "ctrl+alt+c",
+        "mac": "cmd+alt+c"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "codexSessionTabs",
+          "title": "Codex Sessions",
+          "icon": "resources/session-tabs.svg"
+        }
+      ]
+    },
+    "views": {
+      "codexSessionTabs": [
+        {
+          "id": "codexSessionTabs.usage",
+          "name": "%extension.contributes.views.codexSessionTabs.0.name%",
+          "type": "webview",
+          "visibility": "visible",
+          "initialSize": 2,
+          "icon": "resources/session-tabs.svg"
+        },
+        {
+          "id": "codexSessionTabs.sessions",
+          "name": "%extension.contributes.views.codexSessionTabs.1.name%",
+          "visibility": "visible",
+          "initialSize": 6,
+          "icon": "resources/session-tabs.svg"
+        }
+      ]
+    },
+    "menus": {
+      "editor/title": [
+        {
+          "command": "codexSessionTabs.focusLast",
+          "when": "activeCustomEditorId != chatgpt.conversationEditor && activeWebviewPanelId != chatgpt.panelView && !codexSessionTabs.activeTerminal",
+          "group": "navigation@1"
+        },
+        {
+          "command": "codexSessionTabs.history",
+          "when": "activeCustomEditorId == chatgpt.conversationEditor || activeWebviewPanelId == chatgpt.panelView || codexSessionTabs.activeTerminal",
+          "group": "navigation@1"
+        },
+        {
+          "command": "codexSessionTabs.newChat",
+          "when": "activeCustomEditorId == chatgpt.conversationEditor || activeWebviewPanelId == chatgpt.panelView || codexSessionTabs.activeTerminal",
+          "group": "navigation@2"
+        }
+      ],
+      "view/title": [
+        {
+          "command": "codexSessionTabs.newChat",
+          "when": "view == codexSessionTabs.sessions",
+          "group": "navigation@1"
+        },
+        {
+          "command": "codexSessionTabs.openSettings",
+          "when": "view == codexSessionTabs.sessions",
+          "group": "settings@1"
+        },
+        {
+          "command": "codexSessionTabs.search",
+          "when": "view == codexSessionTabs.sessions",
+          "group": "navigation@2"
+        },
+        {
+          "command": "codexSessionTabs.clearSearch",
+          "when": "view == codexSessionTabs.sessions && codexSessionTabs.searchActive",
+          "group": "navigation@3"
+        },
+        {
+          "command": "codexSessionTabs.toggleProject",
+          "when": "view == codexSessionTabs.sessions",
+          "group": "navigation@4"
+        },
+        {
+          "command": "codexSessionTabs.refresh",
+          "when": "view == codexSessionTabs.sessions || view == codexSessionTabs.usage",
+          "group": "navigation@5"
+        },
+        {
+          "command": "codexSessionTabs.reopenClosed",
+          "when": "view == codexSessionTabs.sessions",
+          "group": "sessions@1"
+        },
+        {
+          "command": "codexSessionTabs.chooseMode",
+          "when": "view == codexSessionTabs.sessions",
+          "group": "sessions@2"
+        },
+        {
+          "command": "codexSessionTabs.recoverUI",
+          "when": "view == codexSessionTabs.sessions",
+          "group": "sessions@2"
+        },
+        {
+          "command": "codexSessionTabs.chooseLanguage",
+          "when": "view == codexSessionTabs.sessions",
+          "group": "sessions@3"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "codexSessionTabs.rename",
+          "when": "view == codexSessionTabs.sessions && viewItem =~ /codexSession/",
+          "group": "codexSessions@0"
+        },
+        {
+          "command": "codexSessionTabs.sidebar.pin",
+          "when": "view == codexSessionTabs.sessions && viewItem =~ /codexSession/",
+          "group": "inline@2"
+        },
+        {
+          "command": "codexSessionTabs.sidebar.beside",
+          "when": "view == codexSessionTabs.sessions && viewItem =~ /-closed-/",
+          "group": "inline@2"
+        },
+        {
+          "command": "codexSessionTabs.sidebar.close",
+          "when": "view == codexSessionTabs.sessions && viewItem =~ /-open-/",
+          "group": "inline@2"
+        },
+        {
+          "command": "codexSessionTabs.generateTitle",
+          "when": "view == codexSessionTabs.sessions && viewItem =~ /codexSession/",
+          "group": "codexSessions@1"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "codexSessionTabs.sidebar.open",
+          "when": "false"
+        },
+        {
+          "command": "codexSessionTabs.sidebar.beside",
+          "when": "false"
+        },
+        {
+          "command": "codexSessionTabs.sidebar.pin",
+          "when": "false"
+        },
+        {
+          "command": "codexSessionTabs.sidebar.close",
+          "when": "false"
+        }
+      ],
+      "editor/title/context": [
+        {
+          "command": "codexSessionTabs.rename",
+          "when": "activeCustomEditorId == chatgpt.conversationEditor || codexSessionTabs.activeTerminal",
+          "group": "codexSessions@0"
+        },
+        {
+          "command": "codexSessionTabs.history",
+          "when": "activeCustomEditorId == chatgpt.conversationEditor",
+          "group": "codexSessions@1"
+        },
+        {
+          "command": "codexSessionTabs.reopenClosed",
+          "when": "activeCustomEditorId == chatgpt.conversationEditor",
+          "group": "codexSessions@2"
+        },
+        {
+          "command": "codexSessionTabs.generateTitle",
+          "when": "activeCustomEditorId == chatgpt.conversationEditor || codexSessionTabs.activeTerminal",
+          "group": "codexSessions@1"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "test:usage": "node test/usage.js",
+    "test:titles": "node test/smart-titles.js",
+    "test:regressions": "node test/regressions.js",
+    "test:i18n": "node test/i18n.js",
+    "test": "node test/run-unit.js",
+    "test:windows": "node test/run-windows.js",
+    "review:sidebar": "node test/review-sidebar.mjs",
+    "build:icon": "node scripts/build-icon.js",
+    "package": "vsce package --no-dependencies --target win32-x64 --out dist/codex-session-tabs-0.9.0-win32-x64.vsix",
+    "verify:package": "node scripts/verify-package.js",
+    "vscode:prepublish": "npm test",
+    "prepackage": "node -e \"require('node:fs').mkdirSync('dist', { recursive: true })\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mrkarmannik/codex-session-tabs.git"
+  },
+  "preview": true,
+  "icon": "resources/icon.png",
+  "homepage": "https://github.com/mrkarmannik/codex-session-tabs",
+  "bugs": {
+    "url": "https://github.com/mrkarmannik/codex-session-tabs/issues"
+  },
+  "keywords": [
+    "codex",
+    "chat",
+    "sessions",
+    "tabs",
+    "history",
+    "openai"
+  ],
+  "extensionPack": [
+    "openai.chatgpt"
+  ],
+  "devDependencies": {
+    "@vscode/vsce": "4.1.0",
+    "@resvg/resvg-js": "2.6.2"
+  }
+}

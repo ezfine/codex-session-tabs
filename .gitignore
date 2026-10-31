@@ -1,0 +1,8 @@
+node_modules/
+dist/
+previews/
+*.vsix
+*.log
+.env
+.env.*
+backups/
