@@ -1,4 +1,4 @@
-# Codex Session Tabs
+# ThreadShelf for Codex
 
 Use English for code and comments. Check git status before editing. Read docs/development.md.
 

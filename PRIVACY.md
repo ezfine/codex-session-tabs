@@ -1,13 +1,13 @@
 # Data and privacy
 
-Codex Session Tabs runs in the VS Code extension host. It has no telemetry, advertising, analytics SDK, or separate backend.
+ThreadShelf for Codex runs in the VS Code extension host. It has no telemetry, advertising, analytics SDK, or separate backend.
 
 ## Data used
 
 - The local Codex app-server supplies chat metadata: IDs, titles, previews, project paths and update times. It also supplies account usage limits.
 - VS Code extension storage holds pinned-chat metadata, closed-tab history, terminal records, manually named chat IDs and view preferences.
 - VS Code settings hold the selected language, chat mode, title model, title-generation preference and optional CLI path.
-- Diagnostic errors may appear in the **Codex Session Tabs** output channel. Review logs before sharing them: Codex process errors may contain local paths or other details.
+- Diagnostic errors may appear in the **ThreadShelf** output channel. Review logs before sharing them: Codex process errors may contain local paths or other details.
 
 The extension does not read `auth.json` directly. Authentication is handled by the installed Codex executable and official extension.
 

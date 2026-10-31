@@ -39,6 +39,7 @@ for (const file of runtime) assert.ok(files.has('extension/' + file), 'Missing r
 const packed = JSON.parse(files.get('extension/package.json'));
 assert.equal(packed.publisher, 'MrKarmannik');
 assert.equal(packed.version, manifest.version);
+assert.equal(packed.displayName, manifest.displayName);
 assert.equal(packed.preview, true);
 assert.ok(!packed.dependencies || Object.keys(packed.dependencies).length === 0);
 assert.ok(files.get('extension.vsixmanifest').toString('utf8').includes('win32-x64'));

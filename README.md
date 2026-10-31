@@ -1,4 +1,4 @@
-# Codex Session Tabs
+# ThreadShelf for Codex
 
 Open Codex chats in editor tabs. Browse history by project and check account usage from the VS Code sidebar.
 
@@ -17,7 +17,7 @@ The current compatibility check uses OpenAI Codex **26.1021.22027**. Chat tabs u
 
 ## Use
 
-1. Open a project folder and select **Codex Sessions** in the Activity Bar.
+1. Open a project folder and select **ThreadShelf** in the Activity Bar.
 2. Select a chat to open it in a pinned editor tab. Selecting it again returns to the existing tab.
 3. Click **All projects / This project** above the list to switch the history filter. Projects are ordered by their latest loaded chat; expand a project to see its chats.
 
@@ -33,7 +33,7 @@ The extension does not replace VS Code's `Ctrl+Shift+T` editor history. **Codex:
 
 ## Settings
 
-Open **Settings → Extensions → Codex Session Tabs**, or choose **Open extension settings** from the Chats menu.
+Open **Settings → Extensions → ThreadShelf for Codex**, or choose **Open extension settings** from the Chats menu.
 
 | Setting | Default | Purpose |
 | --- | --- | --- |

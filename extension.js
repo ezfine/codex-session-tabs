@@ -70,7 +70,7 @@ function sessionItem(thread, tabs, open) {
 
 function activate(context) {
   configure(() => vscode.workspace.getConfiguration('codexSessionTabs').get('language', 'auto'), () => vscode.env.language);
-  const output = vscode.window.createOutputChannel('Codex Session Tabs');
+  const output = vscode.window.createOutputChannel('ThreadShelf');
   const log = text => output.appendLine(text);
   const withClient = async callback => {
     const client = await createClient(log);
@@ -125,7 +125,7 @@ function activate(context) {
   const generateSessionTitle = async node => {
     const active = tabs.openTabs().find(entry => entry.tab === vscode.window.tabGroups.activeTabGroup.activeTab);
     const id = node?.thread?.id || node?.id || active?.id;
-    if (!id) { vscode.window.showInformationMessage(t("Select a chat in Codex Sessions.")); return; }
+    if (!id) { vscode.window.showInformationMessage(t('Select a chat in the sidebar.')); return; }
     const generated = await vscode.window.withProgress({ location: vscode.ProgressLocation.Notification, title: t("Codex: generating a title") },
       () => titles.generate({ id, preview: node?.thread?.preview }, undefined, true));
     if (generated && !terminals.enabled) vscode.window.setStatusBarMessage(t("Title saved. The graphical tab title will update the next time you open it."), 7000);

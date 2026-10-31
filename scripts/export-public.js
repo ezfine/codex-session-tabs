@@ -13,7 +13,7 @@ const files = [
   'resources/icon.png', 'resources/icon-source.svg', 'resources/session-tabs.svg',
   'resources/screenshots/sidebar-dark.png', 'resources/screenshots/sidebar-light.png',
   'docs/development.md', 'docs/release-check.md', '.vscode/launch.json', '.github/workflows/check.yml',
-  'scripts/build-icon.js', 'scripts/verify-package.js', 'scripts/export-public.js',
+  'scripts/build-icon.js', 'scripts/package.js', 'scripts/verify-package.js', 'scripts/export-public.js',
   ...['run-unit.js', 'usage.js', 'smart-titles.js', 'regressions.js', 'project-paths.js', 'i18n.js',
     'extension-id.js', 'run-windows.js', 'windows-vscode.js', 'verify-ui.mjs', 'verify-live-input.mjs',
     'review-sidebar.mjs', 'sidebar-review-vscode.js'].map(file => 'test/' + file),
@@ -28,5 +28,5 @@ for (const file of files) {
   fs.writeFileSync(output, data);
 }
 fs.writeFileSync(path.join(target, '.gitignore'), 'node_modules/\ndist/\npreviews/\n*.vsix\n*.log\n.env\n.env.*\nbackups/\n');
-fs.writeFileSync(path.join(target, 'AGENTS.md'), '# Codex Session Tabs\n\nUse English for code and comments. Check git status before editing. Read docs/development.md.\n\nRun npm test for standalone checks. Authenticated integration tests must use separate profiles and their own conversations. Live tests consume account allowance. Never publish credentials, user profiles or private conversations. Do not modify the official Codex extension or close user chats to update titles.\n');
+fs.writeFileSync(path.join(target, 'AGENTS.md'), '# ThreadShelf for Codex\n\nUse English for code and comments. Check git status before editing. Read docs/development.md.\n\nRun npm test for standalone checks. Authenticated integration tests must use separate profiles and their own conversations. Live tests consume account allowance. Never publish credentials, user profiles or private conversations. Do not modify the official Codex extension or close user chats to update titles.\n');
 console.log(`Exported ${files.length + 2} public files to ${target}`);

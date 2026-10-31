@@ -1,8 +1,8 @@
 {
   "name": "codex-session-tabs",
-  "displayName": "Codex Session Tabs",
+  "displayName": "ThreadShelf for Codex",
   "description": "%extension.description%",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "publisher": "MrKarmannik",
   "license": "MIT",
   "engines": {
@@ -17,7 +17,7 @@
   ],
   "contributes": {
     "configuration": {
-      "title": "Codex Session Tabs",
+      "title": "ThreadShelf for Codex",
       "properties": {
         "codexSessionTabs.chatMode": {
           "type": "string",
@@ -209,7 +209,7 @@
       "activitybar": [
         {
           "id": "codexSessionTabs",
-          "title": "Codex Sessions",
+          "title": "ThreadShelf",
           "icon": "resources/session-tabs.svg"
         }
       ]
@@ -381,10 +381,9 @@
     "test:windows": "node test/run-windows.js",
     "review:sidebar": "node test/review-sidebar.mjs",
     "build:icon": "node scripts/build-icon.js",
-    "package": "vsce package --no-dependencies --target win32-x64 --out dist/codex-session-tabs-0.9.0-win32-x64.vsix",
+    "package": "node scripts/package.js",
     "verify:package": "node scripts/verify-package.js",
-    "vscode:prepublish": "npm test",
-    "prepackage": "node -e \"require('node:fs').mkdirSync('dist', { recursive: true })\""
+    "vscode:prepublish": "npm test"
   },
   "repository": {
     "type": "git",

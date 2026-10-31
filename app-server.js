@@ -43,7 +43,7 @@ class HistoryClient {
     this.lines = readline.createInterface({ input: this.process.stdout });
     this.lines.on('line', line => this.receive(line));
     await this.request('initialize', {
-      clientInfo: { name: 'codex_session_tabs', title: 'Codex Session Tabs', version: '0.9.0' },
+      clientInfo: { name: 'codex_session_tabs', title: 'ThreadShelf for Codex', version: '0.9.1' },
       capabilities: { experimentalApi: true },
     });
     this.send({ method: 'initialized', params: {} });

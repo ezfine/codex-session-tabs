@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.9.1 — Marketplace display name
+
+- Rename the extension to **ThreadShelf for Codex** because the previous display name is already taken.
+- Keep the extension ID, settings and storage keys unchanged.
+- Derive the VSIX filename from the package version to avoid uploading an older build by mistake.
+
 ## 0.9.0 — First public preview
 
 - Publish as `MrKarmannik.codex-session-tabs` for Windows x64 and VS Code 1.111.0 or newer.

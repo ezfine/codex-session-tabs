@@ -25,7 +25,7 @@
   "The title will be saved in Codex history": "Название сохранится в истории Codex",
   "Enter a chat title": "Введи название чата",
   "Title saved. The graphical tab title will update the next time you open it.": "Название сохранено. Заголовок графической вкладки обновится при её следующем открытии.",
-  "Select a chat in Codex Sessions.": "Выбери чат в панели Codex Sessions.",
+  "Select a chat in the sidebar.": "Выбери чат в боковой панели.",
   "Codex: generating a title": "Codex: придумываю название",
   "$(comment-discussion) Graphical chat": "$(comment-discussion) Графический чат",
   "Official Codex extension interface": "Интерфейс официального расширения Codex",
