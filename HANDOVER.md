@@ -36,9 +36,17 @@ The original thread paths are retained for display and session actions.
   filtering in both directions and grouping.
 - The short checkout path and its physical path matched and formed one group
   in a local check with synthetic threads.
-- VS Code integration and authenticated tests were not run.
-
-## Next steps
-
-1. When doing integration verification, check the **This project** filter
-   and project grouping in an isolated VS Code profile with synthetic chats.
+- VS Code 1.147.0 with Codex 26.51117.41037 passed the sidebar integration
+  check in an isolated VS Code profile and Codex data directory. VS Code
+  opened `C:\Projects\ThreadShelf` and read three test chats from the
+  real local app-server. The test seeded one legacy short-path entry in the
+  isolated history index because the current app-server canonicalizes new
+  entries. The other chat used `C:\OneDrive\Projects\ThreadShelf`, and a
+  chat in the `test` subfolder served as a control.
+- In the rendered sidebar, **All projects** showed both path variants in one
+  **ThreadShelf** group and the control in a separate **test** group.
+  Clicking the scope row switched to **This project**, which kept both
+  ThreadShelf chats and excluded the control. Switching back restored both
+  groups. The test window exited successfully.
+- Test turns used a loopback response fixture. The check used no signed-in
+  account or personal chat history.
