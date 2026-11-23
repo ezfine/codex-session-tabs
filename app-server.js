@@ -4,7 +4,7 @@ const { t } = require('./i18n');
 
 const { spawn } = require('node:child_process');
 const readline = require('node:readline');
-const { inProject } = require('./project-paths');
+const { projectFilter } = require('./project-paths');
 
 // Metadata and isolated title requests. User conversations belong to the official UI or CLI.
 class HistoryClient {
@@ -101,6 +101,7 @@ class HistoryClient {
   async list({ cursor = null, cwd = null } = {}) {
     await this.start();
     const folders = Array.isArray(cwd) ? cwd : cwd ? [cwd] : [];
+    const matchesProject = folders.length ? projectFilter(folders) : undefined;
     const seen = new Set();
     // The server compares cwd literally. Filter here so alternate Windows path
     // spellings are not discarded before either history UI sees them.
@@ -114,8 +115,8 @@ class HistoryClient {
         modelProviders: [],
         useStateDbOnly: true,
       });
-      if (!folders.length) return page;
-      const data = page.data.filter(thread => inProject(thread.cwd, folders));
+      if (!matchesProject) return page;
+      const data = page.data.filter(thread => matchesProject(thread.cwd));
       if (data.length || !page.nextCursor) return { ...page, data };
       if (seen.has(page.nextCursor)) throw new Error('Codex returned a repeated history cursor');
       seen.add(page.nextCursor);

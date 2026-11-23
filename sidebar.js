@@ -5,7 +5,7 @@ const { t, locale } = require('./i18n');
 const vscode = require('vscode');
 const { quotaBuckets } = require('./usage');
 const { usageHtml } = require('./usage-view');
-const { inProject } = require('./project-paths');
+const { projectFilter } = require('./project-paths');
 const { groupProjects, projectName } = require('./session-projects');
 
 const title = thread => (thread.name?.trim() || thread.preview?.trim() || t("Untitled")).replace(/\s+/g, ' ');
@@ -203,14 +203,14 @@ class Sidebar {
       return [{ kind: 'session', thread, uri: entry.uri, label: thread ? title(thread) : entry.label, open: true }];
     }), 'files');
     const workspacePaths = vscode.workspace.workspaceFolders?.map(folder => folder.uri.fsPath) || [];
+    const matchesProject = this.tabs.filterProject && workspacePaths.length ? projectFilter(workspacePaths) : () => true;
     add(t("Pinned"), this.tabs.pins.flatMap(saved => {
       const thread = metadata.get(saved.id) || saved;
-      if (used.has(thread.id) || !matches(thread) || (this.tabs.filterProject && workspacePaths.length && !inProject(thread.cwd, workspacePaths))) return [];
+      if (used.has(thread.id) || !matches(thread) || !matchesProject(thread.cwd)) return [];
       used.add(thread.id);
       return [{ kind: 'session', thread, label: title(thread) }];
     }), 'pinned');
-    const history = this.threads.filter(thread => !used.has(thread.id) && matches(thread) &&
-      (!this.tabs.filterProject || !workspacePaths.length || inProject(thread.cwd, workspacePaths)));
+    const history = this.threads.filter(thread => !used.has(thread.id) && matches(thread) && matchesProject(thread.cwd));
     const session = thread => ({ kind: 'session', label: title(thread), thread });
     if (!this.tabs.filterProject) {
       for (const project of groupProjects(history)) roots.push({

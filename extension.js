@@ -11,7 +11,7 @@ const { SessionTabs } = require('./session-tabs');
 const { Sidebar } = require('./sidebar');
 const { TerminalSessions } = require('./terminal-sessions');
 const { SessionTitles } = require('./session-titles');
-const { inProject } = require('./project-paths');
+const { projectFilter } = require('./project-paths');
 const { groupProjects } = require('./session-projects');
 
 const EDITOR = 'chatgpt.conversationEditor';
@@ -191,7 +191,8 @@ function activate(context) {
         return { label: `$(comment-discussion) ${entry.label}`, description: t("open"), uri: entry.uri,
           buttons: [{ kind: 'close', iconPath: new vscode.ThemeIcon('close'), tooltip: t("Close tab") }] };
       }));
-      section(t("Pinned"), tabs.pins.filter(thread => !used.has(thread.id) && (!projectOnly || inProject(thread.cwd, workspacePaths))).map(thread => {
+      const matchesProject = projectOnly ? projectFilter(workspacePaths) : () => true;
+      section(t("Pinned"), tabs.pins.filter(thread => !used.has(thread.id) && matchesProject(thread.cwd)).map(thread => {
         used.add(thread.id);
         return sessionItem(metadata.get(thread.id) || thread, tabs);
       }));

@@ -2,7 +2,7 @@
 
 const path = require('node:path');
 const { t } = require('./i18n');
-const { projectKey } = require('./project-paths');
+const { projectKey, createProjectKey } = require('./project-paths');
 
 const updated = thread => Number.isFinite(thread.updatedAt) ? thread.updatedAt : 0;
 const compare = (a, b) => a < b ? -1 : a > b ? 1 : 0;
@@ -15,8 +15,9 @@ function projectName(cwd) {
 
 function groupProjects(threads) {
   const projects = new Map();
+  const keyFor = createProjectKey();
   for (const thread of threads) {
-    const key = projectKey(thread.cwd) || (thread.cwd ? `raw:${thread.cwd}` : 'none');
+    const key = keyFor(thread.cwd) || (thread.cwd ? `raw:${thread.cwd}` : 'none');
     if (!projects.has(key)) projects.set(key, { key, threads: [] });
     projects.get(key).threads.push(thread);
   }

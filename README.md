@@ -10,10 +10,9 @@ An independent extension by **MrKarmannik**. It is not an OpenAI product and is 
 
 ## Windows path matching fork
 
-This fork targets Windows project history when a workspace is opened through
-a directory symbolic link or junction. The goal is for **This project** and
-project grouping to recognize the link and its target as the same folder,
-while keeping distinct siblings and subfolders separate.
+On Windows, **This project** and project grouping treat a drive-letter path
+through a directory symbolic link or junction as equivalent to its resolved
+path. Distinct siblings and subfolders remain separate projects.
 
 The Windows development checkout uses `C:\Projects\ThreadShelf`. The Git
 remote `origin` points to the [fork](https://github.com/ezfine/codex-session-tabs).
@@ -85,7 +84,7 @@ Chat history is provided by the local Codex app-server. Pins and view preference
 - Graphical tab titles are controlled by the official Codex editor. A saved rename may require closing and reopening the tab. This extension does not close chats to update a caption.
 - A conversation can have an active writer in another window. Finish work there before opening it for writing here.
 - Search and project ordering apply to loaded history. Use **Load more sessions** to include older chats.
-- Folder matching is exact after path normalization: Windows drive case, separators, UNC and extended paths are handled; sibling folders and subfolders are separate projects.
+- Folder matching uses normalized path text when a Windows drive-letter path cannot be resolved. UNC paths are compared by normalized text without probing the share.
 - This first public preview is packaged for Windows x64. Other platforms, Remote SSH and WSL are not part of its tested support scope.
 
 ## Updating from local builds
