@@ -8,6 +8,31 @@ An independent extension by **MrKarmannik**. It is not an OpenAI product and is 
 
 ![Project history and account usage in the dark theme](resources/screenshots/sidebar-dark.png)
 
+## Windows path matching fork
+
+This fork targets Windows project history when a workspace is opened through
+a directory symbolic link or junction. The goal is for **This project** and
+project grouping to recognize the link and its target as the same folder,
+while keeping distinct siblings and subfolders separate.
+
+The Windows development checkout uses `C:\Projects\ThreadShelf`. The Git
+remote `origin` points to the [fork](https://github.com/ezfine/codex-session-tabs).
+The remote `upstream` points to the [original repository](https://github.com/mrkarmannik/codex-session-tabs).
+
+In PowerShell, use Node.js 22 or newer to run the standalone checks.
+
+```powershell
+Set-Location -LiteralPath 'C:\Projects\ThreadShelf'
+npm test
+```
+
+See the [development guide](docs/development.md) for installing build
+dependencies and running an isolated Extension Development Host.
+
+- [AGENTS.md](AGENTS.md) describes the project workflow for Codex.
+- [CLAUDE.md](CLAUDE.md) is the Claude entry point.
+- [HANDOVER.md](HANDOVER.md) records the current state, verification and next steps.
+
 ## Requirements
 
 - Windows x64 and VS Code **1.111.0 or newer** for this preview.
